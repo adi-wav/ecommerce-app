@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import { useAuth } from "../context/auth";
 import axios from "axios";
@@ -6,6 +7,7 @@ import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -153,7 +155,12 @@ const HomePage = () => {
                   <h5 className="card-title">{p.name}</h5>
                   <p className="card-text">{p.description.substring(0, 30)}</p>
                   <p className="card-text">{p.price}</p>
-                  <button className="btn btn-primary ms-1">See details</button>
+                  <button
+                    className="btn btn-primary ms-1"
+                    onClick={() => navigate(`/product/${p.slug}`)}
+                  >
+                    See details
+                  </button>
                   <button className="btn btn-secondary ms-1">
                     add to cart
                   </button>
