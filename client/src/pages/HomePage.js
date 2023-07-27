@@ -5,9 +5,12 @@ import { useAuth } from "../context/auth";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
+import { useCart } from "../context/cart";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -161,7 +164,17 @@ const HomePage = () => {
                   >
                     See details
                   </button>
-                  <button className="btn btn-secondary ms-1">
+                  <button
+                    className="btn btn-secondary ms-1"
+                    onClick={() => {
+                      setCart([...cart, p]);
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, p])
+                      );
+                      toast.success("item added successfully");
+                    }}
+                  >
                     add to cart
                   </button>
                 </div>
