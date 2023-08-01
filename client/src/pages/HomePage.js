@@ -112,8 +112,14 @@ const HomePage = () => {
 
   return (
     <Layout title={"All products Best offers"}>
-      <div className="container-fluid row mt-3">
-        <div className="col md-2">
+    <img
+        src="/images/banner.png"
+        className="banner-img"
+        alt="bannerimage"
+        width={"100%"}
+      />
+      <div className="container-fluid row mt-3 home-page">
+        <div className="col md-3 filters">
           <h4 className="text-center">Filter by category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
