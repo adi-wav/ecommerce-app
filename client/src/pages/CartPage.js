@@ -3,8 +3,9 @@ import Layout from "./../components/Layout/Layout";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import DropIn from "braintree-web-drop-in-react";
+import { AiFillWarning } from "react-icons/ai";
+import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/CartStyles.css";
 
@@ -31,8 +32,7 @@ const CartPage = () => {
       console.log(error);
     }
   };
-
-  //delete item
+  //detele item
   const removeCartItem = (pid) => {
     try {
       let myCart = [...cart];
@@ -54,7 +54,6 @@ const CartPage = () => {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getToken();
   }, [auth?.token]);
@@ -72,16 +71,15 @@ const CartPage = () => {
       localStorage.removeItem("cart");
       setCart([]);
       navigate("/dashboard/user/orders");
-      toast.success("payment successful");
+      toast.success("Payment Completed Successfully ");
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
-
   return (
     <Layout>
-      <div className="container">
+      <div className=" cart-page">
         <div className="row">
           <div className="col-md-12">
             <h1 className="text-center bg-light p-2 mb-1">
@@ -97,23 +95,27 @@ const CartPage = () => {
               </p>
             </h1>
           </div>
-          <div className="row">
-            <div className="col-md-8">
+        </div>
+        <div className="container ">
+          <div className="row ">
+            <div className="col-md-7  p-0 m-0">
               {cart?.map((p) => (
-                <div className="row m-2 card p-3 flex-row">
+                <div className="row card flex-row" key={p._id}>
                   <div className="col-md-4">
                     <img
                       src={`/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
-                      width="100px"
-                      height="100px"
+                      width="100%"
+                      height={"130px"}
                     />
                   </div>
-                  <div className="col-md-8">
+                  <div className="col-md-4">
                     <p>{p.name}</p>
                     <p>{p.description.substring(0, 30)}</p>
-                    <h4>{p.price}</h4>
+                    <p>Price : {p.price}</p>
+                  </div>
+                  <div className="col-md-4 cart-remove-btn">
                     <button
                       className="btn btn-danger"
                       onClick={() => removeCartItem(p._id)}
@@ -124,21 +126,21 @@ const CartPage = () => {
                 </div>
               ))}
             </div>
-            <div className="col-md-4 text-center">
-              <h2>Cart summary</h2>
-              <p>Total | checkout | payment</p>
+            <div className="col-md-5 cart-summary ">
+              <h2>Cart Summary</h2>
+              <p>Total | Checkout | Payment</p>
               <hr />
-              <h4>Total : {totalPrice()}</h4>
+              <h4>Total : {totalPrice()} </h4>
               {auth?.user?.address ? (
                 <>
                   <div className="mb-3">
-                    <h4>Current address:</h4>
+                    <h4>Current Address</h4>
                     <h5>{auth?.user?.address}</h5>
                     <button
                       className="btn btn-outline-warning"
                       onClick={() => navigate("/dashboard/user/profile")}
                     >
-                      update address
+                      Update Address
                     </button>
                   </div>
                 </>
@@ -149,7 +151,7 @@ const CartPage = () => {
                       className="btn btn-outline-warning"
                       onClick={() => navigate("/dashboard/user/profile")}
                     >
-                      update address
+                      Update Address
                     </button>
                   ) : (
                     <button
@@ -160,13 +162,13 @@ const CartPage = () => {
                         })
                       }
                     >
-                      please login to checkout
+                      Plase Login to checkout
                     </button>
                   )}
                 </div>
               )}
               <div className="mt-2">
-                {!clientToken || !cart?.length ? (
+                {!clientToken || !auth?.token || !cart?.length ? (
                   ""
                 ) : (
                   <>
@@ -179,12 +181,13 @@ const CartPage = () => {
                       }}
                       onInstance={(instance) => setInstance(instance)}
                     />
+
                     <button
                       className="btn btn-primary"
                       onClick={handlePayment}
                       disabled={loading || !instance || !auth?.user?.address}
                     >
-                      {loading ? "processing..." : "make payment"}
+                      {loading ? "Processing ...." : "Make Payment"}
                     </button>
                   </>
                 )}

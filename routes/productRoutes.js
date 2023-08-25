@@ -1,7 +1,6 @@
 import express from "express";
-import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import {
-  braintreePaymentController,
+  brainTreePaymentController,
   braintreeTokenController,
   createProductController,
   deleteProductController,
@@ -12,10 +11,11 @@ import {
   productFiltersController,
   productListController,
   productPhotoController,
-  relatedProductController,
+  realtedProductController,
   searchProductController,
   updateProductController,
-} from "../controller/productController.js";
+} from "../controllers/productController.js";
+import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import formidable from "express-formidable";
 
 const router = express.Router();
@@ -28,19 +28,6 @@ router.post(
   formidable(),
   createProductController
 );
-
-//get products
-router.get("/get-product", getProductController);
-
-//get single products
-router.get("/get-product/:slug", getSingleProductController);
-
-//get photo
-router.get("/product-photo/:pid", productPhotoController);
-
-//get single products
-router.delete("/delete-product/:pid", deleteProductController);
-
 //routes
 router.put(
   "/update-product/:pid",
@@ -50,8 +37,20 @@ router.put(
   updateProductController
 );
 
+//get products
+router.get("/get-product", getProductController);
+
+//single product
+router.get("/get-product/:slug", getSingleProductController);
+
+//get photo
+router.get("/product-photo/:pid", productPhotoController);
+
+//delete rproduct
+router.delete("/delete-product/:pid", deleteProductController);
+
 //filter product
-router.post("/product-filter", productFiltersController);
+router.post("/product-filters", productFiltersController);
 
 //product count
 router.get("/product-count", productCountController);
@@ -62,8 +61,8 @@ router.get("/product-list/:page", productListController);
 //search product
 router.get("/search/:keyword", searchProductController);
 
-//similar products
-router.get("/related-product/:pid/:cid", relatedProductController);
+//similar product
+router.get("/related-product/:pid/:cid", realtedProductController);
 
 //category wise product
 router.get("/product-category/:slug", productCategoryController);
@@ -73,6 +72,6 @@ router.get("/product-category/:slug", productCategoryController);
 router.get("/braintree/token", braintreeTokenController);
 
 //payments
-router.post("/braintree/payment", requireSignIn, braintreePaymentController);
+router.post("/braintree/payment", requireSignIn, brainTreePaymentController);
 
 export default router;

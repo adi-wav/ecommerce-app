@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/Layout/Layout";
-import AdminMenu from "../../components/Layout/AdminMenu";
+import Layout from "./../../components/Layout/Layout";
+import AdminMenu from "./../../components/Layout/AdminMenu";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
-
 const { Option } = Select;
 
 const CreateProduct = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
+  const [photo, setPhoto] = useState("");
 
-  //get all cats
+  //get all category
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-category");
@@ -28,7 +27,7 @@ const CreateProduct = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong in getting catgory");
+      toast.error("Something wwent wrong in getting catgeory");
     }
   };
 
@@ -54,18 +53,18 @@ const CreateProduct = () => {
       if (data?.success) {
         toast.error(data?.message);
       } else {
-        toast.success("Product created successfully");
+        toast.success("Product Created Successfully");
         navigate("/dashboard/admin/products");
       }
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong in creating product");
+      toast.error("something went wrong");
     }
   };
 
   return (
-    <Layout title={"Create Product"}>
-      <div className="container-fluid m-3 p-3">
+    <Layout title={"Dashboard - Create Product"}>
+      <div className="container-fluid m-3 p-3 dashboard">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
@@ -75,7 +74,7 @@ const CreateProduct = () => {
             <div className="m-1 w-75">
               <Select
                 bordered={false}
-                placeholder="select a category"
+                placeholder="Select a category"
                 size="large"
                 showSearch
                 className="form-select mb-3"
@@ -95,7 +94,7 @@ const CreateProduct = () => {
                   <input
                     type="file"
                     name="photo"
-                    accept="image/"
+                    accept="image/*"
                     onChange={(e) => setPhoto(e.target.files[0])}
                     hidden
                   />
@@ -106,7 +105,7 @@ const CreateProduct = () => {
                   <div className="text-center">
                     <img
                       src={URL.createObjectURL(photo)}
-                      alt="product photo"
+                      alt="product_photo"
                       height={"200px"}
                       className="img img-responsive"
                     />

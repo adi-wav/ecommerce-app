@@ -1,30 +1,29 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage.js";
-import About from "./pages/About.js";
-import Contact from "./pages/Contact.js";
-import Policy from "./pages/Policy.js";
-import Pagenotfound from "./pages/Pagenotfound.js";
-import Register from "./pages/Auth/Register.js";
-import Login from "./pages/Auth/Login.js";
-import Dashboard from "./pages/user/Dashboard.js";
-import PrivateRoute from "./components/Routes/Private.js";
-import ForgotPassword from "./pages/Auth/ForgotPassword.js";
-import AdminRoute from "./components/Routes/AdminRoute.js";
-import AdminDashboard from "./pages/Admin/AdminDashboard.js";
-import CreateCategory from "./pages/Admin/CreateCategory.js";
-import CreateProduct from "./pages/Admin/CreateProduct.js";
-import Users from "./pages/Admin/Users.js";
-import Orders from "./pages/user/Orders.js";
-import Profile from "./pages/user/Profile.js";
-import Products from "./pages/Admin/Products.js";
-import UpdateProduct from "./pages/Admin/UpdateProduct.js";
-import Search from "./pages/Search.js";
-import ProductDetails from "./pages/ProductDetails.js";
-import Categories from "./pages/Categories.js";
-import CategoryProduct from "./pages/CategoryProduct.js";
-import CartPage from "./pages/CartPage.js";
-import AdminOrders from "./pages/Admin/AdminOrders.js";
-
+import HomePage from "./pages/HomePage";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Policy from "./pages/Policy";
+import Pagenotfound from "./pages/Pagenotfound";
+import Register from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
+import Dashboard from "./pages/user/Dashboard";
+import PrivateRoute from "./components/Routes/Private";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
+import AdminRoute from "./components/Routes/AdminRoute";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import CreateCategory from "./pages/Admin/CreateCategory";
+import CreateProduct from "./pages/Admin/CreateProduct";
+import Users from "./pages/Admin/Users";
+import Orders from "./pages/user/Orders";
+import Profile from "./pages/user/Profile";
+import Products from "./pages/Admin/Products";
+import UpdateProduct from "./pages/Admin/UpdateProduct";
+import Search from "./pages/Search";
+import ProductDetails from "./pages/ProductDetails";
+import Categories from "./pages/Categories";
+import CategoryProduct from "./pages/CategoryProduct";
+import CartPage from "./pages/CartPage";
+import AdminOrders from "./pages/Admin/AdminOrders";
 function App() {
   return (
     <>

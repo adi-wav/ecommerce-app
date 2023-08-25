@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Layout from "../../components/Layout/Layout";
+import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../styles/AuthStyles.css";
 
-const ForgotPasssword = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [answer, setAnswer] = useState("");
@@ -23,6 +23,7 @@ const ForgotPasssword = () => {
       });
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
+
         navigate("/login");
       } else {
         toast.error(res.data.message);
@@ -81,4 +82,4 @@ const ForgotPasssword = () => {
   );
 };
 
-export default ForgotPasssword;
+export default ForgotPassword;
